@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>AKIO MAX</title>
+    <style>
+        body,h1,h2,p{margin: 0;padding: 0}       
+        body{
+            font-family: "Pretendard Variable", sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+        h2{padding: 0px 100px;}
+        /* 네비게이션 바  */
+        nav{
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            padding: 2vw;
+        }
+       
+        .pic{background: url(1.jpg);
+            background-size: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            background-attachment: fixed;
+            align-content: center;
+            padding: 600px 0px;
+        }
+        
+        .bar{
+            background:white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5vw 4vw;
+            width: 100%;
+            max-width: 90vw;
+        }
+        .logo{
+            font-size: 2.2vw;
+            font-weight: 900;
+            color: #1a1a1a;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 4vw;
+        }
+        .nav-menu a {
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 1.1vw;
+            font-weight: 600;
+        }
+        .nav-menu a:hover {
+            color: #1a1a1a;
+        }
+        .preorder {
+            background-image: linear-gradient(#1a1a1a, #1a1a1a);
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 0.8vw 2.5vw;
+            border-radius: 9999px;
+            font-size: 1vw;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .preorder:hover {
+            background-image: linear-gradient(90deg, #a3e635 0%,#2dd4bf 50%,#3b82f6 100%);
+            color: #1a1a1a;
+            transform: scale(1.05);
+        }
+        /* 메인 레이아웃 */
+        .main {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        /* 제목 그라데이션 */
+        .text-gradient {
+            margin-top: 100px;
+            position: absolute;
+            font-size: 20vw;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.05em;
+            z-index: 1;
+            pointer-events: none;
+            background: linear-gradient(180deg, #222 0%, #666 0%, #bbb 10%, #fff 100%);
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        /* 애니메이션 */
+        @keyframes appear {
+            0%{ opacity: 0; transform: translateY(50px) scale(0.95); }
+            100%{ opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .headphone-wrapper {
+            position: relative;
+            margin-top: 100px;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            animation: 
+                appear 1.5s cubic-bezier(0.2, 1, 0.3, 1) both,
+                float 4s ease-in-out infinite 1.5s;
+        }
+        .headphone-image {
+            width: 50vw;
+            max-width: 1200px;
+            min-width: 300px;
+            height: auto;
+        }
+        .animate-text {
+            animation: appear 1.5s cubic-bezier(0.2, 1, 0.3, 1) 0.8s both;
+        }
+        .moving-box {
+            justify-content: center;
+            margin: auto;
+            width: 3000px;
+            animation-name: slide;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-direction:alternate ;
+            animation-timing-function: ease-in-out;
+            display: flex;
+        }
+        .banner {
+            overflow: hidden;
+            width: 100%;
+            background: black;
+            color: white;
+        }
+
+        .track {
+            display: flex;
+            width: max-content;
+            animation: scroll 10s linear infinite;
+        }
+
+        .content {
+            white-space: nowrap;
+            padding-right: 50px;
+            font-size: 20px;
+        }
+
+        @keyframes scroll {
+            0% {transform: translateX(0);}
+            100% {transform: translateX(-50%);}
+            }   
+        .banner-text {
+            position:relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3vw;
+            font-weight: bold;
+            pointer-events: none;
+        }
+        .chat-wrap {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            overflow: visible;
+        }
+        .bubble {
+            display: none;
+            width: 500px;
+            cursor: pointer;
+            position: absolute;
+        }
+      
+
+
+        .b1 { top: 0; left: 0; padding: 0px 100px; animation: blinkColor 1.2s infinite;}
+        .b2 { top: 230px; right: 160px; padding: 0px 100px; width: 55%;}
+        .b3 { top: 0px; left: 530px;padding: 0px 100px; width:40% }
+        .b4 { bottom: 188px; left: 390px;padding: 0px 100px; width:58%; }
+        .b5 { bottom: 45px; right: -260px;padding: 0px 100px; width: 60%}
+
+        .bubble.active{
+            display: block;
+        }
+        @keyframes blinkColor {0%,100% {opacity:1;} 50%{opacity: 0.4;}
+}
+        .bubble-text {position: absolute;
+            bottom: 270px;
+            right: -720px;
+            color: white;
+            font-size: 2vw;
+            opacity: 0;
+            transition: 0.5s;
+                }
+        .bubble-text.show {opacity: 1;}
+        .bright{width: 60vw; transform: translateX(750px); translateY:800px;}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="bar">
+            <div class="logo">AKIOMAX</div>
+            <div class="nav-menu">
+                <a href="#">Features</a>
+                <a href="#COLORS">Color</a>
+                <a href="#">Pricing</a>
+                <a href="#">Contact</a>
+            </div>
+            <button class="preorder">Pre-order now</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="main" style>
+        <div class="headphone-wrapper">
+            <img src="AKIOMAX_WHITE.png" alt="AKIOMAX Headphone" class="headphone-image">
+        </div>
+        <h1 class="text-gradient animate-text">AKIOMAX</h1>
+    </section>
+    <section class="pic" style="color: white;margin-top: 600px;">
+        <h2 style="font-size: 4vw; text-shadow: 2px 2px 4px #1a1a1a;">당신만을 위한 아르바이트 도우미</h2>
+    </section>
+    <section style="background-color: #1a1a1a;">
+        <div class="banner">
+            <div class="track">
+              <div class="content">
+                <img class="moving-box" src="2.png" style="margin-bottom: 50px;">
+                </div>
+            </div>
+             <div class="banner-text">
+                        <h2 style="margin-top: 80px; margin-bottom: 200px;"><em>매번 반복되는 정신없는 피크타임,<br> 지치지 않으셨나요?</em></h2>
+                    </div>
+        </div>
+    </section>
+    <section style="background-color:black;">
+        <div class="chat-wrap" >
+            <img src="b1.png" class="bubble b1 active">
+            <img src="b2.png" class="bubble b2">
+            <img src="b3.png" class="bubble b3">
+            <img src="b4.png" class="bubble b4">
+            <img src="b5.png" class="bubble b5">
+            <div class="bubble-text">
+            <h2 style="font-size: 2.8vw;">누구나 한 번 쯤 겪는 일들</h2></div>
+        </div>
+    <script>
+        const bubbles = document.querySelectorAll('.bubble');
+        const bubbleText = document.querySelector('.bubble-text');
+
+        bubbles.forEach((bubble, index) => {
+        bubble.addEventListener('click', () => {
+        bubble.style.animation = 'none';    
+        if (bubbles[index + 1]) {
+            bubbles[index + 1].classList.add('active');
+                }
+         
+        const firstBubble = document.querySelector('.b1');
+
+        firstBubble.addEventListener('click', () => {
+        firstBubble.style.animation = 'none';
+        });
+        if (index === bubbles.length - 1) {
+        bubbleText.classList.add('show');
+                 }
+            });
+        });
+       
+    </script>
+    
+    </section>    
+</section>
+<section style="background: linear-gradient(to bottom,
+    #000000 0%, #e96501 70%,
+    #fc8b35 100%); padding-top: 0;overflow: hidden;">
+    <h2 style="padding: 600px 50px; font-size: 9vw; font-weight: bold; color: white; ">그런 당신을 위한<br>AKIO MAX</h2>
+</section>
+<section style="margin-top: 300px;">
+</section>
+
+</body>
+</html>
